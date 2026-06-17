@@ -4,7 +4,6 @@ import { useState } from 'react'
 import MixSliders from '../components/MixSliders'
 import ResultGauges from '../components/ResultGauges'
 import MixPieChart from '../components/MixPieChart'
-import ReferenceBar from '../components/ReferenceBar'
 import Footer from '../components/Footer'
 import PresetSelector from '../components/PresetSelector'
 import { ENERGY_SOURCES, REF_MIX, refMix } from '../data/energyData'
@@ -74,12 +73,6 @@ export default function SimulateurPage() {
       </div>
 
       <Footer theme={theme} />
-      <ReferenceBar
-        refMix={REF_MIX}
-        sources={ENERGY_SOURCES}
-        refData={refMix}
-        theme={theme}
-      />
     </>
   )
 }

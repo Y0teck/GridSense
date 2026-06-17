@@ -4,13 +4,43 @@ import { ENERGY_SOURCES } from '../data/energyData'
 
 export default function MixSliders({ mix, onChange, theme, presetLabel = null }) {
   const sources = Object.values(ENERGY_SOURCES)
-  const total = sources.reduce((sum, source) => sum + mix[source.id], 0)
   const isLight = theme === 'light'
 
   function updateSource(id, value) {
+    const newValue = Math.min(100, Math.max(0, Number(value)))
+    const remaining = 100 - newValue
+    const otherSources = sources.filter((source) => source.id !== id)
+    const otherTotal = otherSources.reduce((sum, source) => sum + mix[source.id], 0)
+
+    const adjustedOthers = {}
+
+    if (otherTotal === 0) {
+      const baseValue = Math.floor(remaining / otherSources.length)
+      const leftover = remaining - baseValue * otherSources.length
+
+      otherSources.forEach((source, index) => {
+        adjustedOthers[source.id] = baseValue + (index === 0 ? leftover : 0)
+      })
+    } else {
+      otherSources.forEach((source) => {
+        adjustedOthers[source.id] = Math.round((mix[source.id] * remaining) / otherTotal)
+      })
+
+      const adjustedTotal = otherSources.reduce((sum, source) => {
+        return sum + adjustedOthers[source.id]
+      }, 0)
+      const difference = remaining - adjustedTotal
+      const largestSource = otherSources.reduce((largest, source) => {
+        return adjustedOthers[source.id] > adjustedOthers[largest.id] ? source : largest
+      }, otherSources[0])
+
+      adjustedOthers[largestSource.id] += difference
+    }
+
     onChange({
       ...mix,
-      [id]: Number(value),
+      [id]: newValue,
+      ...adjustedOthers,
     })
   }
 
@@ -32,7 +62,7 @@ export default function MixSliders({ mix, onChange, theme, presetLabel = null })
             {presetLabel ? `Mix énergétique de ${presetLabel}` : 'Mix énergétique'}
           </h2>
           <p className={`mt-1 text-sm ${isLight ? 'text-[#475569]' : 'text-[#9CA3AF]'}`}>
-            Ajustez chaque filière indépendamment.
+            {presetLabel ? 'Mix préconfiguré modifiable.' : "Les autres filières s'ajustent automatiquement."}
           </p>
         </div>
       </div>
@@ -76,22 +106,6 @@ export default function MixSliders({ mix, onChange, theme, presetLabel = null })
           </label>
         ))}
       </div>
-
-      <div
-        className={`mt-6 h-2 overflow-hidden rounded-full ${
-          total === 100 ? 'bg-[#10B981]' : 'bg-[#EF4444]'
-        }`}
-        aria-hidden="true"
-      />
-
-      <p
-        className={`mt-3 font-mono text-sm font-bold ${
-          total === 100 ? 'text-[#10B981]' : 'text-[#EF4444]'
-        }`}
-        role="status"
-      >
-        Total : {total}%
-      </p>
     </section>
   )
 }

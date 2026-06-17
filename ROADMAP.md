@@ -26,7 +26,7 @@ Statuts : ✅ Fait · 🚧 En cours · 💡 À faire
 | ✅ | Sélecteur de pays en grille (10 pays, état actif marqué) |
 | ✅ | Titre dynamique "Mix énergétique de [pays]" |
 | ✅ | Reset du label preset au mouvement des sliders |
-| 💡 | Auto-normalisation des sliders à 100% (le total reste toujours égal à 100 en rééquilibrant les autres sources) |
+| ✅ | Auto-normalisation des sliders à 100% (redistribution proportionnelle entre les autres sources) |
 | 💡 | Contraintes réalistes par source (capacité max installée par pays) |
 | 💡 | Alerte si mix physiquement incohérent |
 | 💡 | Indicateur "Accord de Paris" avec écart par rapport à l'objectif 50 gCO₂eq/kWh |
@@ -50,10 +50,22 @@ Statuts : ✅ Fait · 🚧 En cours · 💡 À faire
 
 | Statut | Fonctionnalité |
 |--------|---------------|
+| 🚧 | Tooltips explicatifs sur chaque indicateur |
 | 💡 | Fiches par source d'énergie (avantages, limites, chiffres clés) |
-| 💡 | Tooltips explicatifs sur chaque indicateur |
-| 💡 | Mode quiz/défi : atteindre un objectif CO₂ ou coût imposé |
 | 💡 | Glossaire des termes (LCOE, pilotable, bas-carbone…) |
+| 💡 | Mode quiz/défi : atteindre un objectif CO₂ ou coût imposé |
+| 💡 | Scénarios GIEC intégrés en mode jeu ou prévision (SSP1, SSP2, SSP5…) avec objectif Accord de Paris 1.5°C / 2°C |
+| 💡 | Indicateur "Accord de Paris" avec écart par rapport à l'objectif 50 gCO₂eq/kWh (à mixer avec scénarios GIEC) |
+
+---
+
+## Données temps réel
+
+| Statut | Fonctionnalité |
+|--------|---------------|
+| 💡 | Visualisation temps réel du mix France (API RTE eCO2mix) |
+| 💡 | Visualisation par région française (données RTE régionales) |
+| 💡 | Visualisation temps réel monde (API Electricity Maps) |
 
 ---
 
@@ -74,3 +86,28 @@ Statuts : ✅ Fait · 🚧 En cours · 💡 À faire
 | 💡 | URL partageable encodant le mix custom (query params) |
 | 💡 | Export PNG du résumé indicateurs |
 | 💡 | Sauvegarde de scénarios nommés en localStorage |
+
+---
+
+## Page "Aller plus loin"
+
+| Statut | Fonctionnalité |
+|--------|---------------|
+| 💡 | Page dédiée avec ressources classées par thème |
+| 💡 | GIEC / IPCC — rapports AR6, résumés pour décideurs |
+| 💡 | Carbone 4 / Jean-Marc Jancovici — articles, conférences |
+| 💡 | Electricity Maps — visualisation temps réel mondiale |
+| 💡 | RTE / ODRÉ — données françaises open data |
+| 💡 | IEA — World Energy Outlook, statistiques mondiales |
+| 💡 | Wikipedia — pages clés (mix énergétique, LCOE, facteur de charge…) |
+| 💡 | Livres recommandés (ex. "Le monde sans fin" — Jancovici & Blain) |
+
+---
+
+## Mobile & distribution
+
+| Statut | Fonctionnalité |
+|--------|---------------|
+| 💡 | Build APK Android (Capacitor ou PWA) |
+| 💡 | Publication de l'APK dans les Releases GitHub |
+| 💡 | PWA installable (manifest + service worker) |
