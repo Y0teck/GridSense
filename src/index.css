@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes pulse-line {
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+.animate-pulse-line {
+  animation: pulse-line 3s ease-in-out infinite;
+}
+
+:root {
+  --color-bg: #0A0F1E;
+  --color-card: #111827;
+  --color-border: #1F2937;
+  --color-accent: #22D3EE;
+  --color-accent2: #F59E0B;
+  --color-text: #F9FAFB;
+  --color-muted: #9CA3AF;
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-danger: #EF4444;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: #0A0F1E;
+  color: #F9FAFB;
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+.font-data {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.energy-slider {
+  appearance: none;
+  -webkit-appearance: none;
+  height: 22px;
+  background: transparent;
+}
+
+.energy-slider:focus {
+  outline: none;
+}
+
+.energy-slider::-webkit-slider-runnable-track {
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    var(--slider-color, #22D3EE) 0%,
+    var(--slider-color, #22D3EE) var(--slider-progress, 0%),
+    var(--slider-track, #1F2937) var(--slider-progress, 0%),
+    var(--slider-track, #1F2937) 100%
+  );
+}
+
+.energy-slider::-webkit-slider-thumb {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  margin-top: -5px;
+  border: 3px solid var(--slider-color, #22D3EE);
+  border-radius: 999px;
+  background: #FFFFFF;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+
+.energy-slider:focus-visible::-webkit-slider-thumb {
+  box-shadow:
+    0 0 0 3px rgba(34, 211, 238, 0.28),
+    0 1px 4px rgba(0, 0, 0, 0.35);
+}
+
+.energy-slider::-moz-range-track {
+  height: 8px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--slider-track, #1F2937);
+}
+
+.energy-slider::-moz-range-progress {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--slider-color, #22D3EE);
+}
+
+.energy-slider::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border: 3px solid var(--slider-color, #22D3EE);
+  border-radius: 999px;
+  background: #FFFFFF;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+
+.energy-slider:focus-visible::-moz-range-thumb {
+  box-shadow:
+    0 0 0 3px rgba(34, 211, 238, 0.28),
+    0 1px 4px rgba(0, 0, 0, 0.35);
+}

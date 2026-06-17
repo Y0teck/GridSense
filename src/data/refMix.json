@@ -1,0 +1,14 @@
+{
+  "annee": 2025,
+  "nucleaire": 373,
+  "eolien": 49.6,
+  "solaire": 32.9,
+  "hydraulique": 62.4,
+  "gaz": 16.4,
+  "charbon": 0.7,
+  "fioul": 1.6,
+  "bioenergies": 10.9,
+  "total": 547.5,
+  "source": "ODRE / RTE - Bilan electrique annuel",
+  "url": "https://odre.opendatasoft.com/explore/dataset/prod-national-annuel-filiere/"
+}
