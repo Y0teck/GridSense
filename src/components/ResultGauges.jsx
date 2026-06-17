@@ -1,4 +1,147 @@
+import { useState } from 'react'
+import IndicatorModal from './IndicatorModal'
+
 // Source donnees : resultats calcules depuis src/utils/calculations.js.
+
+const INDICATOR_CONTENT = {
+  co2: {
+    title: 'Émissions CO₂',
+    unit: 'gCO₂eq/kWh',
+    definition:
+      "Quantité de CO₂ équivalent émise pour produire 1 kWh, en tenant compte du cycle de vie complet de chaque source : fabrication, construction, exploitation et démantèlement des installations.",
+    calculation:
+      'CO₂ = Σ (part_source × coef_co2_source)\nCoefficients IPCC AR6 :\n- Nucléaire : 12 gCO₂eq/kWh\n- Éolien : 11 gCO₂eq/kWh\n- Solaire : 45 gCO₂eq/kWh\n- Hydraulique : 24 gCO₂eq/kWh\n- Gaz : 490 gCO₂eq/kWh\n- Thermique fossile : 820 gCO₂eq/kWh\n- Bioénergies : 230 gCO₂eq/kWh',
+    references: [
+      { label: 'France (RTE 2025)', value: '~34 gCO₂eq/kWh' },
+      { label: 'Union européenne (2023)', value: '~242 gCO₂eq/kWh' },
+      { label: 'Allemagne (2023)', value: '~380 gCO₂eq/kWh' },
+      { label: 'Moyenne mondiale', value: '~460 gCO₂eq/kWh' },
+      { label: 'Objectif Accord de Paris', value: '< 50 gCO₂eq/kWh' },
+    ],
+    example:
+      "Un mix à 100 % gaz émettrait ~490 gCO₂eq/kWh — soit 14× le mix français actuel. À l'inverse, 100 % nucléaire ne dépasserait pas 12 gCO₂eq/kWh.",
+    caveat:
+      "Les coefficients IPCC sont des médianes. Le nucléaire peut varier de 4 à 110 gCO₂eq/kWh selon la durée de vie, le site et la méthode d'allocation de l'uranium.",
+    sources: [
+      { name: 'IPCC AR6 WGIII — Annexe III (2022)', url: 'https://www.ipcc.ch/report/ar6/wg3/' },
+      {
+        name: 'RTE — Bilan électrique 2025',
+        url: 'https://odre.opendatasoft.com/explore/dataset/prod-national-annuel-filiere/',
+      },
+      {
+        name: 'Ember — European Electricity Review 2024',
+        url: 'https://ember-energy.org/latest-insights/european-electricity-review-2024/eu-electricity-trends/',
+      },
+    ],
+  },
+  cost: {
+    title: 'Coût de production',
+    unit: '€/MWh',
+    definition:
+      "Le LCOE (Levelized Cost of Energy) représente le coût moyen de production d'un MWh sur toute la durée de vie d'une installation, incluant construction, exploitation et financement. C'est l'indicateur standard de comparaison entre filières.",
+    calculation:
+      'Coût = Σ (part_source × LCOE_source)\nValeurs IRENA 2023 :\n- Éolien : 50 €/MWh\n- Solaire : 45 €/MWh\n- Hydraulique : 40 €/MWh\n- Nucléaire : 70 €/MWh\n- Gaz : 100 €/MWh\n- Thermique fossile : 80 €/MWh\n- Bioénergies : 90 €/MWh',
+    references: [
+      { label: 'France (mix 2025)', value: '~65 €/MWh' },
+      { label: 'Allemagne (mix 2023)', value: '~85 €/MWh' },
+      { label: 'Solaire seul', value: '~45 €/MWh' },
+      { label: 'Gaz seul', value: '~100 €/MWh' },
+    ],
+    example:
+      "Le solaire et l'éolien ont aujourd'hui un LCOE inférieur au gaz sur le seul coût de production — mais leur intermittence entraîne des coûts réseau non inclus ici.",
+    caveat:
+      'Le LCOE ne tient pas compte des subventions, des coûts de stockage, ni des coûts de démantèlement (nucléaire). Comparer des LCOE bruts entre pays peut être trompeur.',
+    sources: [
+      {
+        name: 'IRENA — Renewable Power Generation Costs 2023',
+        url: 'https://www.irena.org/Publications/2024/Sep/Renewable-Power-Generation-Costs-in-2023',
+      },
+    ],
+  },
+  stability: {
+    title: 'Stabilité réseau',
+    unit: '/100',
+    definition:
+      "Score représentant la part des sources pilotables (dispatchables) dans le mix : sources dont on peut ajuster la production à la demande en temps réel. Un réseau avec beaucoup de sources intermittentes (éolien, solaire) est plus difficile à équilibrer et nécessite des capacités de stockage ou de backup.",
+    calculation:
+      'Stabilité = Σ parts des sources pilotables\nSources pilotables : nucléaire, hydraulique, gaz, thermique fossile, bioénergies\nSources intermittentes (non comptées) : éolien, solaire',
+    references: [
+      { label: 'France (mix 2025)', value: '~85/100' },
+      { label: 'Norvège (quasi 100% hydro)', value: '~99/100' },
+      { label: 'Union européenne (2023)', value: '~65/100' },
+      { label: 'Allemagne (mix 2023)', value: '~60/100' },
+      { label: 'Seuil recommandé', value: '≥ 60/100' },
+    ],
+    example:
+      "L'Allemagne (~60 %) fait face au 'duck curve' : surplus solaire à midi, pic de demande le soir sans soleil. La France (~85 %) est moins exposée à ce phénomène.",
+    caveat:
+      "Ce score simplifie la réalité : l'hydraulique fil-de-l'eau est moins flexible qu'un barrage-lac. Les interconnexions européennes peuvent aussi compenser l'intermittence locale.",
+    sources: [
+      { name: 'Méthodologie interne ÉnergIA', url: null },
+      {
+        name: "RTE — Rapport sur l'adéquation du système électrique",
+        url: 'https://www.rte-france.com/analyses-tendances-et-prospectives/bilan-previsionnel-2050-futurs-energetiques',
+      },
+    ],
+  },
+  renewables: {
+    title: 'Énergies renouvelables',
+    unit: '%',
+    definition:
+      "Part des énergies renouvelables dans le mix électrique : éolien (terrestre et offshore), solaire photovoltaïque, hydraulique (fil de l'eau, lac, STEP) et bioénergies (biomasse, biogaz, déchets). Le nucléaire n'est pas comptabilisé comme renouvelable.",
+    calculation: 'Renouvelables = éolien + solaire + hydraulique + bioénergies',
+    references: [
+      { label: 'France (RTE 2025)', value: '~28%' },
+      { label: 'Union européenne (2023)', value: '45,3%' },
+      { label: 'Allemagne (2023)', value: '~59%' },
+      { label: 'Norvège (2023)', value: '~98%' },
+      { label: 'Objectif UE 2030 (RED III)', value: '42,5%' },
+    ],
+    example:
+      "La Norvège (~98 %) illustre qu'un mix quasi 100 % renouvelable est possible — grâce à ses fjords et barrages. Cette géographie est rare et non reproductible partout.",
+    caveat:
+      'Toutes les renouvelables ne sont pas équivalentes : éolien et solaire sont intermittents, hydraulique et biomasse sont pilotables. Le pourcentage brut ne reflète pas cette différence.',
+    sources: [
+      {
+        name: 'Directive européenne RED III (2023)',
+        url: 'https://energy.ec.europa.eu/topics/renewable-energy/renewable-energy-directive-targets-and-rules/renewable-energy-directive_en',
+      },
+      {
+        name: 'IEA — World Energy Outlook 2025',
+        url: 'https://www.iea.org/reports/world-energy-outlook-2025',
+      },
+      {
+        name: "Eurostat — Part des renouvelables dans l'électricité 2023",
+        url: 'https://ec.europa.eu/eurostat/en/web/products-eurostat-news/w/ddn-20250221-3',
+      },
+    ],
+  },
+  lowCarbon: {
+    title: 'Énergie bas-carbone',
+    unit: '%',
+    definition:
+      "Part des sources d'électricité émettant peu de CO₂ sur leur cycle de vie : le nucléaire (12 gCO₂eq/kWh) et toutes les énergies renouvelables. Cet indicateur reflète la capacité d'un mix à décarboner le secteur électrique, indépendamment du caractère renouvelable ou non des sources.",
+    calculation: 'Bas-carbone = nucléaire + éolien + solaire + hydraulique + bioénergies',
+    references: [
+      { label: 'France (RTE 2025)', value: '~97%' },
+      { label: 'Suède (2023)', value: '~99%' },
+      { label: 'Union européenne (2023)', value: '~70%' },
+      { label: 'Allemagne (2023)', value: '~60%' },
+      { label: 'Monde (2023)', value: '~38%' },
+    ],
+    example:
+      'France (~97 %) et Suède (~99 %) atteignent le même résultat par deux chemins différents : nucléaire dominant pour la France, mix hydraulique + nucléaire pour la Suède.',
+    caveat:
+      "Le nucléaire est bas-carbone mais non renouvelable — c'est pourquoi les indicateurs 'Renouvelables' et 'Bas-carbone' peuvent diverger fortement pour un même mix.",
+    sources: [
+      {
+        name: 'IEA — World Energy Outlook 2025',
+        url: 'https://www.iea.org/reports/world-energy-outlook-2025',
+      },
+      { name: 'IPCC AR6 WGIII — Annexe III (2022)', url: 'https://www.ipcc.ch/report/ar6/wg3/' },
+    ],
+  },
+}
 
 function getCO2Color(value) {
   if (value <= 100) return 'text-[#10B981]'
@@ -30,17 +173,30 @@ function getLowCarbonColor(value) {
   return 'text-[#EF4444]'
 }
 
-function GaugeCard({ label, value, unit, colorClass, sublabel, theme }) {
+function GaugeCard({ label, value, unit, colorClass, sublabel, indicator, theme, onInfoClick }) {
   const isLight = theme === 'light'
 
   return (
     <article
-      className={`rounded-xl p-5 transition-colors ${
+      className={`group relative rounded-xl p-5 transition-colors ${
         isLight ? 'border border-[#E2E8F0] bg-white' : 'bg-[#111827]'
       }`}
     >
+      <button
+        type="button"
+        onClick={() => onInfoClick(indicator)}
+        aria-label={`Afficher les détails : ${label}`}
+        className={`absolute right-3 top-3 flex h-6 w-6 items-center justify-center rounded-full border text-xs font-bold opacity-0 transition-all group-hover:opacity-100 ${
+          isLight
+            ? 'border-[#CBD5E1] text-[#64748B] hover:border-[#22D3EE] hover:text-[#22D3EE]'
+            : 'border-[#374151] text-[#6B7280] hover:border-[#22D3EE] hover:text-[#22D3EE]'
+        }`}
+      >
+        i
+      </button>
+
       <p
-        className={`text-xs font-semibold uppercase tracking-normal ${
+        className={`pr-8 text-xs font-semibold uppercase tracking-normal ${
           isLight ? 'text-[#64748B]' : 'text-[#9CA3AF]'
         }`}
       >
@@ -64,48 +220,70 @@ function GaugeCard({ label, value, unit, colorClass, sublabel, theme }) {
 }
 
 export default function ResultGauges({ co2, cost, stability, renewables, lowCarbon, theme }) {
+  const [openIndicator, setOpenIndicator] = useState(null)
+
   return (
-    <section className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-      <GaugeCard
-        label="Émissions CO₂"
-        value={co2}
-        unit="gCO₂eq/kWh"
-        colorClass={getCO2Color(co2)}
-        sublabel="Moyenne pondérée cycle de vie (IPCC AR6)"
-        theme={theme}
-      />
-      <GaugeCard
-        label="Coût de production"
-        value={cost}
-        unit="€/MWh"
-        colorClass={getCostColor(cost)}
-        sublabel="LCOE moyen pondéré (IRENA 2023, indicatif)"
-        theme={theme}
-      />
-      <GaugeCard
-        label="Stabilité réseau"
-        value={stability}
-        unit="/100"
-        colorClass={getStabilityColor(stability)}
-        sublabel="Part des sources pilotables (dispatchables)"
-        theme={theme}
-      />
-      <GaugeCard
-        label="Énergies renouvelables"
-        value={renewables}
-        unit="%"
-        colorClass={getRenewablesColor(renewables)}
-        sublabel="Éolien + Solaire + Hydraulique + Bioénergies"
-        theme={theme}
-      />
-      <GaugeCard
-        label="Énergie bas-carbone"
-        value={lowCarbon}
-        unit="%"
-        colorClass={getLowCarbonColor(lowCarbon)}
-        sublabel="Nucléaire + Renouvelables"
-        theme={theme}
-      />
-    </section>
+    <>
+      <section className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <GaugeCard
+          label="Émissions CO₂"
+          value={co2}
+          unit="gCO₂eq/kWh"
+          colorClass={getCO2Color(co2)}
+          sublabel="Moyenne pondérée cycle de vie (IPCC AR6)"
+          indicator={INDICATOR_CONTENT.co2}
+          theme={theme}
+          onInfoClick={setOpenIndicator}
+        />
+        <GaugeCard
+          label="Coût de production"
+          value={cost}
+          unit="€/MWh"
+          colorClass={getCostColor(cost)}
+          sublabel="LCOE moyen pondéré (IRENA 2023, indicatif)"
+          indicator={INDICATOR_CONTENT.cost}
+          theme={theme}
+          onInfoClick={setOpenIndicator}
+        />
+        <GaugeCard
+          label="Stabilité réseau"
+          value={stability}
+          unit="/100"
+          colorClass={getStabilityColor(stability)}
+          sublabel="Part des sources pilotables (dispatchables)"
+          indicator={INDICATOR_CONTENT.stability}
+          theme={theme}
+          onInfoClick={setOpenIndicator}
+        />
+        <GaugeCard
+          label="Énergies renouvelables"
+          value={renewables}
+          unit="%"
+          colorClass={getRenewablesColor(renewables)}
+          sublabel="Éolien + Solaire + Hydraulique + Bioénergies"
+          indicator={INDICATOR_CONTENT.renewables}
+          theme={theme}
+          onInfoClick={setOpenIndicator}
+        />
+        <GaugeCard
+          label="Énergie bas-carbone"
+          value={lowCarbon}
+          unit="%"
+          colorClass={getLowCarbonColor(lowCarbon)}
+          sublabel="Nucléaire + Renouvelables"
+          indicator={INDICATOR_CONTENT.lowCarbon}
+          theme={theme}
+          onInfoClick={setOpenIndicator}
+        />
+      </section>
+
+      {openIndicator ? (
+        <IndicatorModal
+          indicator={openIndicator}
+          theme={theme}
+          onClose={() => setOpenIndicator(null)}
+        />
+      ) : null}
+    </>
   )
 }

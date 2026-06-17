@@ -13,7 +13,7 @@ Statuts : ✅ Fait · 🚧 En cours · 💡 À faire
 | ✅ | Thème dark / light |
 | ✅ | Logo SVG + favicon custom |
 | ✅ | Footer avec liens sociaux (GitHub, Mastodon, Bluesky) |
-| ✅ | Page Sources & méthodologie avec liens vers IEA, IPCC, IRENA, RTE |
+| ✅ | Page Sources & méthodologie avec liens vers IEA, IPCC, IRENA, RTE, Ember, Eurostat, RED III |
 
 ---
 
@@ -50,7 +50,7 @@ Statuts : ✅ Fait · 🚧 En cours · 💡 À faire
 
 | Statut | Fonctionnalité |
 |--------|---------------|
-| 🚧 | Tooltips explicatifs sur chaque indicateur |
+| ✅ | Modales explicatives sur chaque indicateur (définition, calcul, références UE/pays, exemple concret, limites) |
 | 💡 | Fiches par source d'énergie (avantages, limites, chiffres clés) |
 | 💡 | Glossaire des termes (LCOE, pilotable, bas-carbone…) |
 | 💡 | Mode quiz/défi : atteindre un objectif CO₂ ou coût imposé |

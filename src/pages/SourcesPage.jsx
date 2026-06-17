@@ -23,6 +23,27 @@ const SOURCES = [
       'Émissions de CO₂ en cycle de vie (gCO₂eq/kWh) par technologie de production électrique. Valeurs médianes utilisées.',
   },
   {
+    title: 'Valeurs de référence — Union européenne',
+    name: 'Ember — European Electricity Review 2024',
+    url: 'https://ember-energy.org/latest-insights/european-electricity-review-2024/eu-electricity-trends/',
+    description:
+      'Données sur le mix électrique européen 2023 : intensité carbone (~242 gCO₂eq/kWh) et composition par filière. Utilisées comme valeur de référence UE dans les indicateurs CO₂ et bas-carbone.',
+  },
+  {
+    title: 'Part des renouvelables — Union européenne',
+    name: 'Eurostat — Share of renewables in electricity 2023',
+    url: 'https://ec.europa.eu/eurostat/en/web/products-eurostat-news/w/ddn-20250221-3',
+    description:
+      "Part des énergies renouvelables dans la production électrique européenne : 45,3 % en 2023. Utilisée comme valeur de référence UE dans l'indicateur Renouvelables.",
+  },
+  {
+    title: 'Objectif renouvelables 2030',
+    name: 'Directive européenne RED III (2023)',
+    url: 'https://energy.ec.europa.eu/topics/renewable-energy/renewable-energy-directive-targets-and-rules/renewable-energy-directive_en',
+    description:
+      "Directive fixant l'objectif contraignant de 42,5 % d'énergies renouvelables dans la consommation finale d'énergie de l'UE d'ici 2030. Utilisée comme objectif de référence dans l'indicateur Renouvelables.",
+  },
+  {
     title: 'Coûts de production (LCOE)',
     name: 'IRENA — Renewable Power Generation Costs 2023',
     url: 'https://www.irena.org/Publications/2024/Sep/Renewable-Power-Generation-Costs-in-2023',
