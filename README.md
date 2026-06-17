@@ -124,4 +124,4 @@ energiA/
 
 ## 👤 Auteur
 
-Jean-Julien Molères — Hackathon Defend Intelligence 48h, juin 2026
+Yoteck — Hackathon Defend Intelligence 48h, juin 2026
