@@ -122,17 +122,19 @@ energiA/
 
 ## ⚙️ Fonctionnalités
 
-- [x] Navigation multi-pages extensible (React Router) : Simulateur, Comparaison pays, Sources
+- [x] Navigation multi-pages extensible (React Router) : Simulateur, Comparaison pays, Sources, Aller plus loin
 - [x] 7 curseurs de mix énergétique indépendants avec indicateurs recalculés en temps réel
 - [x] 5 indicateurs d'impact colorés par seuil : CO₂, coût, stabilité réseau, renouvelables, bas-carbone
 - [x] Sélecteur de 10 pays préconfigurés (données IEA WEO 2025, historique 2023)
 - [x] Comparateur côte à côte entre deux pays avec différenciation des meilleures valeurs
 - [x] Camembert interactif du mix énergétique
-- [x] Barre de référence RTE 2025 (données réelles ODRÉ)
-- [x] Page Sources & méthodologie avec références complètes (IEA, IPCC AR6, IRENA, ODRÉ/RTE)
+- [x] Page Sources & méthodologie avec références complètes (IEA, IPCC AR6, IRENA, ODRÉ/RTE, Ember, Eurostat, RED III, Nations Unies)
+- [x] Modales explicatives sur chaque indicateur (définition, calcul, valeurs de référence, exemple concret, limites)
+- [x] Indicateur Accord de Paris avec écart par rapport à l'objectif 1,5°C (< 50 gCO₂eq/kWh)
+- [x] Page "Aller plus loin" avec ressources classées par thème (IPCC, Jancovici, IEA, Electricity Maps…)
 - [x] Mode clair / mode sombre
 - [x] Logo SVG custom + favicon
-- [ ] Auto-normalisation des sliders à 100%
+- [x] Auto-normalisation des sliders à 100% (redistribution proportionnelle)
 - [ ] Mode quiz/défi avec objectifs et score
 - [ ] Carte choroplèthe mondiale CO₂/kWh
 - [ ] Évolution temporelle du mix (slider historique)

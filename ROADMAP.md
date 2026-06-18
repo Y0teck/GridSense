@@ -9,7 +9,8 @@ Statuts : ✅ Fait · 🚧 En cours · 💡 À faire
 | Statut | Fonctionnalité |
 |--------|---------------|
 | ✅ | Architecture multi-pages avec React Router extensible |
-| ✅ | Navigation menu (Simulateur, Comparaison, Sources) |
+| ✅ | Navigation menu (Simulateur, Comparaison, Sources, Aller plus loin) |
+| 💡 | Internationalisation FR/EN (LanguageContext + fichier de strings centralisé, toggle dans le header) |
 | ✅ | Thème dark / light |
 | ✅ | Logo SVG + favicon custom |
 | ✅ | Footer avec liens sociaux (GitHub, Mastodon, Bluesky) |
@@ -83,7 +84,7 @@ Statuts : ✅ Fait · 🚧 En cours · 💡 À faire
 
 | Statut | Fonctionnalité |
 |--------|---------------|
-| 💡 | URL partageable encodant le mix custom (query params) |
+| ✅ | URL partageable encodant le mix custom (query params) |
 | 💡 | Export PNG du résumé indicateurs |
 | 💡 | Sauvegarde de scénarios nommés en localStorage |
 
