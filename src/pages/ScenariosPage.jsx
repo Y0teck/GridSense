@@ -132,7 +132,7 @@ export default function ScenariosPage() {
   function simulateMix(mix) {
     const params = new URLSearchParams()
     MIX_KEYS.forEach((key) => params.set(key, String(mix[key])))
-    navigate(`/?${params.toString()}`)
+    navigate(`/simulateur?${params.toString()}`)
   }
 
   return (

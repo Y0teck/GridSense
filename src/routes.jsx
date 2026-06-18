@@ -1,3 +1,4 @@
+import LandingPage from './pages/LandingPage'
 import SimulateurPage from './pages/SimulateurPage'
 import ComparaisonPage from './pages/ComparaisonPage'
 import SourcesPage from './pages/SourcesPage'
@@ -9,11 +10,12 @@ import EnergiesPage from './pages/EnergiesPage'
 import ScenariosPage from './pages/ScenariosPage'
 
 export const ROUTES = [
-  { path: '/', key: 'simulator', element: <SimulateurPage /> },
+  { path: '/', key: 'landing', element: <LandingPage />, hidden: true },
+  { path: '/simulateur', key: 'simulator', element: <SimulateurPage /> },
   { path: '/scenarios', key: 'scenarios', element: <ScenariosPage /> },
   { path: '/carte', key: 'carte', element: <CartePage /> },
-  { path: '/energies', key: 'energies', element: <EnergiesPage /> },
   { path: '/comparaison', key: 'comparison', element: <ComparaisonPage /> },
+  { path: '/energies', key: 'energies', element: <EnergiesPage /> },
   { path: '/quiz', key: 'challenges', element: <QuizPage /> },
   { path: '/glossaire', aliases: ['/glossary'], key: 'glossaire', element: <GlossairePage /> },
   { path: '/aller-plus-loin', key: 'goFurther', element: <AllerPlusLoinPage /> },

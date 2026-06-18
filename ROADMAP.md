@@ -17,6 +17,11 @@ Statuts : ✅ Fait · 🚧 En cours · 💡 À faire
 | ✅ | Page Sources & méthodologie avec liens vers IEA, IPCC, IRENA, RTE, Ember, Eurostat, RED III, ONU, OMS |
 | ✅ | Bouton flottant "retour en haut de page" (ScrollToTop) |
 | ✅ | Renommage du projet : ÉnergIA → GridSense — "See the energy, feel the impact" |
+| ✅ | Landing page avec animations énergie (grille SVG animée, count-up stats, glow CTA), section pédagogique, métriques et footer |
+| ✅ | Navigation responsive : hamburger animé sur mobile (< 768px), menu horizontal sur desktop |
+| ✅ | Langue anglaise par défaut (FR/EN persisté en localStorage) |
+| ✅ | Titre de l'onglet et meta description mis à jour |
+| ✅ | Footer avec liens cliquables (repo GitHub, chaîne YouTube DefendHack2, openai.com/codex) + bouton ⚡ Home |
 
 ---
 

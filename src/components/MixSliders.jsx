@@ -103,7 +103,7 @@ export default function MixSliders({ mix, onChange, theme, presetLabel = null })
                       openSourceDetails(source)
                     }}
                     aria-label={`Afficher les détails : ${label}`}
-                    className={`flex h-6 w-6 items-center justify-center rounded-full border text-xs font-bold opacity-0 transition-all group-hover:opacity-100 ${
+                    className={`flex h-6 w-6 items-center justify-center rounded-full border text-xs font-bold opacity-0 outline-none transition-all group-hover:opacity-100 focus:outline-none ${
                       isLight
                         ? 'border-[#CBD5E1] text-[#64748B] hover:border-[#22D3EE] hover:text-[#22D3EE]'
                         : 'border-[#374151] text-[#6B7280] hover:border-[#22D3EE] hover:text-[#22D3EE]'

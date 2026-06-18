@@ -1,5 +1,7 @@
 // Source donnees : references indicatives IPCC, IRENA et ODRE / RTE.
 
+import { Link } from 'react-router-dom'
+
 export default function Footer({ theme }) {
   const isLight = theme === 'light'
 
@@ -40,12 +42,19 @@ export default function Footer({ theme }) {
         </p>
 
         <div className="flex items-center gap-4">
+          <Link
+            to="/"
+            className={`rounded-full border px-3 py-1 text-[11px] font-semibold transition-colors hover:border-[#22D3EE] hover:text-[#22D3EE] ${
+              isLight ? 'border-[#CBD5E1] text-[#64748B]' : 'border-[#374151] text-[#6B7280]'
+            }`}
+          >
+            ⚡ Home
+          </Link>
           <a
             href="https://github.com/Y0teck"
             target="_blank"
             rel="noreferrer"
             aria-label="GitHub"
-            style={{ color: 'currentColor' }}
             className="text-[#9CA3AF] transition-colors hover:text-[#22D3EE]"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -57,7 +66,6 @@ export default function Footer({ theme }) {
             target="_blank"
             rel="noreferrer"
             aria-label="Mastodon"
-            style={{ color: 'currentColor' }}
             className="text-[#9CA3AF] transition-colors hover:text-[#22D3EE]"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -69,7 +77,6 @@ export default function Footer({ theme }) {
             target="_blank"
             rel="noreferrer"
             aria-label="Bluesky"
-            style={{ color: 'currentColor' }}
             className="text-[#9CA3AF] transition-colors hover:text-[#22D3EE]"
           >
             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">

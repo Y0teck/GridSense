@@ -101,7 +101,7 @@ gridsense/
 ├── src/
 │   ├── components/
 │   │   ├── Header.jsx             # Logo, toggle langue FR/EN, toggle dark/light
-│   │   ├── NavMenu.jsx            # Navigation (piloté par routes.jsx)
+│   │   ├── NavMenu.jsx            # Navigation responsive (hamburger mobile, barre desktop)
 │   │   ├── MixSliders.jsx         # 7 curseurs du mix avec auto-normalisation
 │   │   ├── PresetSelector.jsx     # Grille 50 pays (2 lignes par défaut, toggle)
 │   │   ├── ResultGauges.jsx       # 5 indicateurs d'impact + bannière scénario GIEC
@@ -133,7 +133,7 @@ gridsense/
 │   ├── i18n/
 │   │   ├── strings.js             # Textes FR/EN centralisés
 │   │   └── useStrings.js          # Hook d'accès aux strings
-│   ├── routes.jsx                 # Config centralisée des routes
+│   ├── routes.jsx                 # Config centralisée des routes (landing exclue du Layout)
 │   ├── Layout.jsx                 # Shell : Header + NavMenu + Outlet
 │   ├── ThemeContext.js
 │   ├── LanguageContext.js
@@ -146,7 +146,9 @@ gridsense/
 
 ## ⚙️ Fonctionnalités
 
-- [x] Navigation multi-pages : Simulateur, Scénarios GIEC, Carte, Énergies, Comparaison pays, Quiz, Glossaire, Aller plus loin, Sources
+- [x] Landing page avec animations énergie, section pédagogique, stats et CTA
+- [x] Navigation responsive : menu hamburger sur mobile, barre horizontale sur desktop
+- [x] Navigation multi-pages : Simulateur, Scénarios GIEC, Carte, Comparaison pays, Énergies, Quiz, Glossaire, Aller plus loin, Sources
 - [x] 7 curseurs de mix énergétique avec recalcul en temps réel + auto-normalisation à 100%
 - [x] 5 indicateurs d'impact colorés par seuil : CO₂, coût, stabilité réseau, renouvelables, bas-carbone
 - [x] Bannière scénario GIEC : identifie en temps réel quel scénario SSP le mix simulé respecte
@@ -163,10 +165,11 @@ gridsense/
 - [x] URL partageable encodant le mix custom (query params)
 - [x] Export PNG du résumé indicateurs
 - [x] Bouton flottant "retour en haut" (ScrollToTop)
-- [x] Internationalisation FR/EN persistée
+- [x] Internationalisation FR/EN persistée (anglais par défaut)
 - [x] PWA installable (manifest + service worker)
 - [x] Mode clair / mode sombre
 - [x] Logo SVG custom + favicon
+- [x] Footer avec liens cliquables (GitHub, DefendHack2, Built with Codex) + bouton Home
 - [ ] Évolution temporelle du mix (slider historique)
 - [ ] Données temps réel (API RTE eCO2mix / Electricity Maps)
 
