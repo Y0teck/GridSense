@@ -23,6 +23,27 @@ const SOURCES = [
       'Émissions de CO₂ en cycle de vie (gCO₂eq/kWh) par technologie de production électrique. Valeurs médianes utilisées.',
   },
   {
+    title: 'Objectif climatique — Accord de Paris',
+    name: 'IPCC AR6 — Résumé pour décideurs, trajectoire 1,5°C (2022)',
+    url: 'https://www.ipcc.ch/report/ar6/wg3/chapter/summary-for-policymakers/',
+    description:
+      "Le secteur électrique doit atteindre une intensité carbone inférieure à 50 gCO₂eq/kWh d'ici 2030–2035 pour rester sur une trajectoire compatible avec un réchauffement limité à 1,5°C. Valeur utilisée comme seuil de référence dans l'indicateur Accord de Paris d'ÉnergIA.",
+  },
+  {
+    title: 'Accord de Paris — texte officiel',
+    name: 'Accord de Paris — Nations Unies (2015)',
+    url: 'https://unfccc.int/process-and-meetings/the-paris-agreement',
+    description:
+      "Accord international signé par 196 parties visant à limiter le réchauffement climatique à 1,5–2°C. Fixe le cadre des engagements nationaux de réduction des émissions (NDC) auquel se réfère l'indicateur Accord de Paris d'ÉnergIA.",
+  },
+  {
+    title: 'Scénario net zéro 2050',
+    name: 'IEA — Net Zero by 2050 (2021)',
+    url: 'https://www.iea.org/reports/net-zero-by-2050',
+    description:
+      "Feuille de route de l'AIE pour atteindre la neutralité carbone mondiale en 2050, compatible avec l'objectif 1,5°C. Décrit les transformations nécessaires du secteur électrique, dont la décarbonation quasi-totale d'ici 2035 pour les économies avancées.",
+  },
+  {
     title: 'Valeurs de référence — Union européenne',
     name: 'Ember — European Electricity Review 2024',
     url: 'https://ember-energy.org/latest-insights/european-electricity-review-2024/eu-electricity-trends/',

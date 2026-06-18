@@ -29,7 +29,7 @@ Statuts : ✅ Fait · 🚧 En cours · 💡 À faire
 | ✅ | Auto-normalisation des sliders à 100% (redistribution proportionnelle entre les autres sources) |
 | 💡 | Contraintes réalistes par source (capacité max installée par pays) |
 | 💡 | Alerte si mix physiquement incohérent |
-| 💡 | Indicateur "Accord de Paris" avec écart par rapport à l'objectif 50 gCO₂eq/kWh |
+| ✅ | Indicateur "Accord de Paris" avec écart par rapport à l'objectif 50 gCO₂eq/kWh |
 
 ---
 
@@ -55,7 +55,7 @@ Statuts : ✅ Fait · 🚧 En cours · 💡 À faire
 | 💡 | Glossaire des termes (LCOE, pilotable, bas-carbone…) |
 | 💡 | Mode quiz/défi : atteindre un objectif CO₂ ou coût imposé |
 | 💡 | Scénarios GIEC intégrés en mode jeu ou prévision (SSP1, SSP2, SSP5…) avec objectif Accord de Paris 1.5°C / 2°C |
-| 💡 | Indicateur "Accord de Paris" avec écart par rapport à l'objectif 50 gCO₂eq/kWh (à mixer avec scénarios GIEC) |
+| ✅ | Indicateur "Accord de Paris" avec écart par rapport à l'objectif 50 gCO₂eq/kWh (à mixer avec scénarios GIEC) |
 
 ---
 

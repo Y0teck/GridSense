@@ -143,6 +143,40 @@ const INDICATOR_CONTENT = {
   },
 }
 
+const PARIS_ACCORD_CONTENT = {
+  title: "Accord de Paris — Objectif 1,5°C",
+  unit: '< 50 gCO₂eq/kWh',
+  definition:
+    "L'Accord de Paris (2015) vise à limiter le réchauffement climatique à 1,5°C au-dessus des niveaux préindustriels. Pour atteindre cet objectif, le secteur électrique mondial doit décarboner en priorité : il doit atteindre une intensité carbone inférieure à 50 gCO₂eq/kWh d'ici 2030–2035, contre ~460 gCO₂eq/kWh en moyenne mondiale aujourd'hui.",
+  calculation:
+    "Seuil de référence IPCC AR6 (2022) :\n- Trajectoire 1,5°C : < 50 gCO₂eq/kWh pour l'électricité d'ici 2035\n- Trajectoire 2°C : < 100 gCO₂eq/kWh\n\nL'indicateur ÉnergIA compare les émissions de votre mix simulé à ce seuil de 50 gCO₂eq/kWh.",
+  references: [
+    { label: 'France (RTE 2025)', value: '~34 gCO₂eq/kWh ✓' },
+    { label: 'Union européenne (2023)', value: '~242 gCO₂eq/kWh' },
+    { label: 'Allemagne (2023)', value: '~380 gCO₂eq/kWh' },
+    { label: 'Moyenne mondiale (2023)', value: '~460 gCO₂eq/kWh' },
+    { label: 'Seuil Accord de Paris', value: '< 50 gCO₂eq/kWh' },
+  ],
+  example:
+    "La France est l'un des rares grands pays à déjà respecter ce seuil grâce à son parc nucléaire. À l'inverse, un mix à 50 % gaz atteindrait ~250 gCO₂eq/kWh — 5× au-dessus de l'objectif.",
+  caveat:
+    "Ce seuil s'applique à la production électrique. Il ne suffit pas : l'objectif 1,5°C implique aussi de décarboner les transports, l'industrie et le chauffage, et de réduire la consommation totale d'énergie.",
+  sources: [
+    {
+      name: 'IPCC AR6 — Résumé pour décideurs, trajectoire 1,5°C (2022)',
+      url: 'https://www.ipcc.ch/report/ar6/wg3/chapter/summary-for-policymakers/',
+    },
+    {
+      name: 'Accord de Paris — Nations Unies (2015)',
+      url: 'https://unfccc.int/process-and-meetings/the-paris-agreement',
+    },
+    {
+      name: 'IEA — Net Zero by 2050',
+      url: 'https://www.iea.org/reports/net-zero-by-2050',
+    },
+  ],
+}
+
 function getCO2Color(value) {
   if (value <= 100) return 'text-[#10B981]'
   if (value <= 300) return 'text-[#F59E0B]'
@@ -219,6 +253,83 @@ function GaugeCard({ label, value, unit, colorClass, sublabel, indicator, theme,
   )
 }
 
+function ParisAccordBanner({ co2, theme }) {
+  const [modalOpen, setModalOpen] = useState(false)
+  const isLight = theme === 'light'
+  const isSuccess = co2 <= 50
+  const delta = co2 - 50
+  const borderColor = isSuccess ? 'border-[#10B981]' : co2 <= 200 ? 'border-[#F59E0B]' : 'border-[#EF4444]'
+  const accentColor = isSuccess ? 'text-[#10B981]' : co2 <= 200 ? 'text-[#F59E0B]' : 'text-[#EF4444]'
+  const mutedText = isLight ? 'text-[#475569]' : 'text-[#D1D5DB]'
+
+  return (
+    <>
+      <aside
+        className={`group relative mt-4 flex items-center justify-between gap-4 rounded-xl border p-4 pr-12 transition-colors ${borderColor} ${
+          isSuccess
+            ? isLight
+              ? 'bg-[#D1FAE5]'
+              : 'bg-[#065F46]'
+            : isLight
+              ? 'bg-[#FEF3C7]'
+              : 'bg-[#7C2D12]'
+        }`}
+      >
+        <button
+          type="button"
+          onClick={() => setModalOpen(true)}
+          aria-label="Afficher les détails : Accord de Paris"
+          className={`absolute right-3 top-3 flex h-6 w-6 items-center justify-center rounded-full border text-xs font-bold opacity-0 transition-all group-hover:opacity-100 ${
+            isLight
+              ? 'border-[#CBD5E1] text-[#64748B] hover:border-[#22D3EE] hover:text-[#22D3EE]'
+              : 'border-[#374151] text-[#D1D5DB] hover:border-[#22D3EE] hover:text-[#22D3EE]'
+          }`}
+        >
+          i
+        </button>
+
+        <div className="flex items-center gap-4">
+          <span
+            className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full border font-mono text-lg font-bold ${borderColor} ${accentColor}`}
+            aria-hidden="true"
+          >
+            {isSuccess ? '✓' : '⚠'}
+          </span>
+
+          <div>
+            <p className="font-semibold">
+              {isSuccess
+                ? 'Objectif Accord de Paris atteint'
+                : `${delta} gCO₂eq/kWh au-dessus de l'objectif Accord de Paris`}
+            </p>
+            <p className={`mt-1 text-sm leading-relaxed ${mutedText}`}>
+              {isSuccess
+                ? 'Votre mix est compatible avec une trajectoire 1,5°C — en dessous de 50 gCO₂eq/kWh.'
+                : "L'objectif pour le secteur électrique est < 50 gCO₂eq/kWh (IPCC AR6, trajectoire 1,5°C)."}
+            </p>
+          </div>
+        </div>
+
+        {!isSuccess ? (
+          <span
+            className={`shrink-0 rounded-full border px-3 py-1 font-mono text-sm font-bold ${borderColor} ${accentColor}`}
+          >
+            ×{(co2 / 50).toFixed(1)}
+          </span>
+        ) : null}
+      </aside>
+
+      {modalOpen && (
+        <IndicatorModal
+          indicator={PARIS_ACCORD_CONTENT}
+          theme={theme}
+          onClose={() => setModalOpen(false)}
+        />
+      )}
+    </>
+  )
+}
+
 export default function ResultGauges({ co2, cost, stability, renewables, lowCarbon, theme }) {
   const [openIndicator, setOpenIndicator] = useState(null)
 
@@ -276,6 +387,8 @@ export default function ResultGauges({ co2, cost, stability, renewables, lowCarb
           onInfoClick={setOpenIndicator}
         />
       </section>
+
+      <ParisAccordBanner co2={co2} theme={theme} />
 
       {openIndicator ? (
         <IndicatorModal
