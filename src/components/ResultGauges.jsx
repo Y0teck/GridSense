@@ -367,7 +367,7 @@ export function ParisAccordBanner({ co2, theme, exportMode = false }) {
   )
 }
 
-export default function ResultGauges({ co2, cost, stability, renewables, lowCarbon, theme, exportMode = false }) {
+export default function ResultGauges({ co2, cost, stability, renewables, lowCarbon, theme, exportMode = false, hideParisBanner = false }) {
   const [openIndicator, setOpenIndicator] = useState(null)
 
   return (
@@ -430,7 +430,7 @@ export default function ResultGauges({ co2, cost, stability, renewables, lowCarb
         />
       </section>
 
-      {!exportMode ? <ParisAccordBanner co2={co2} theme={theme} /> : null}
+      {!exportMode && !hideParisBanner ? <ParisAccordBanner co2={co2} theme={theme} /> : null}
 
       {openIndicator && !exportMode ? (
         <IndicatorModal
