@@ -57,6 +57,26 @@ const RAW_SOURCES = [
     url: 'https://www.irena.org/Publications/2024/Sep/Renewable-Power-Generation-Costs-in-2023',
   },
   {
+    name: 'IEA — Nuclear Power and Secure Energy Transitions',
+    url: 'https://www.iea.org/reports/nuclear-power-and-secure-energy-transitions',
+  },
+  {
+    name: 'IEA — Hydropower Special Market Report',
+    url: 'https://www.iea.org/reports/hydropower-special-market-report',
+  },
+  {
+    name: 'IEA — Solar PV Global Supply Chains',
+    url: 'https://www.iea.org/reports/solar-pv-global-supply-chains',
+  },
+  {
+    name: 'IRENA — Bioenergy for the Energy Transition',
+    url: 'https://www.irena.org/publications/2022/Sep/Bioenergy-for-the-Energy-Transition',
+  },
+  {
+    name: 'WHO — Ambient air pollution and health',
+    url: 'https://www.who.int/news-room/fact-sheets/detail/ambient-(outdoor)-air-quality-and-health',
+  },
+  {
     name: {
       fr: 'Méthodologie interne',
       en: 'Internal Methodology',
@@ -148,7 +168,37 @@ const SOURCES_FR = [
     title: 'Indicateur de stabilité réseau',
     description:
       "Score calculé comme la somme des parts (%) des sources pilotables (dispatchables) : nucléaire, hydraulique, gaz, thermique fossile, bioénergies. Les sources intermittentes (éolien, solaire) n'y contribuent pas.",
+    source: RAW_SOURCES[18],
+  },
+  {
+    title: 'Nucléaire — transitions énergétiques sécurisées',
+    description:
+      "Analyse de l'AIE sur le rôle du nucléaire dans la décarbonation du système électrique mondial, coûts, sûreté et perspectives de déploiement.",
     source: RAW_SOURCES[13],
+  },
+  {
+    title: 'Hydraulique — rapport de marché',
+    description:
+      "État des lieux mondial de l'hydroélectricité : capacités, coûts, STEP, potentiel de développement et rôle dans la flexibilité réseau.",
+    source: RAW_SOURCES[14],
+  },
+  {
+    title: "Solaire — chaînes d'approvisionnement mondiales",
+    description:
+      "Analyse de la concentration de la production de panneaux solaires en Chine, dépendances géopolitiques et enjeux de réindustrialisation en Europe.",
+    source: RAW_SOURCES[15],
+  },
+  {
+    title: 'Bioénergie — transition énergétique',
+    description:
+      'Rapport IRENA sur le rôle de la bioénergie dans la décarbonation : critères de durabilité, filières, potentiel et limites.',
+    source: RAW_SOURCES[16],
+  },
+  {
+    title: "OMS — Pollution de l'air et santé",
+    description:
+      "Données mondiales sur l'impact sanitaire de la pollution atmosphérique, en particulier liée à la combustion du charbon (PM2.5, NOx, SO₂).",
+    source: RAW_SOURCES[17],
   },
 ]
 
@@ -235,7 +285,37 @@ const SOURCES_EN = [
     title: 'Grid Stability Indicator',
     description:
       'Score calculated as the sum of dispatchable source shares (%): nuclear, hydro, gas, fossil thermal, bioenergy. Intermittent sources (wind, solar) do not contribute.',
+    source: RAW_SOURCES[18],
+  },
+  {
+    title: 'Nuclear — secure energy transitions',
+    description:
+      "IEA analysis of nuclear power's role in decarbonising the global electricity system: costs, safety, and deployment outlook.",
     source: RAW_SOURCES[13],
+  },
+  {
+    title: 'Hydropower — special market report',
+    description:
+      'Global overview of hydropower: capacity, costs, pumped storage, development potential and role in grid flexibility.',
+    source: RAW_SOURCES[14],
+  },
+  {
+    title: 'Solar PV — global supply chains',
+    description:
+      "Analysis of China's dominance in solar panel manufacturing, geopolitical dependencies, and Europe's reindustrialisation challenges.",
+    source: RAW_SOURCES[15],
+  },
+  {
+    title: 'Bioenergy — energy transition',
+    description:
+      "IRENA report on bioenergy's role in decarbonisation: sustainability criteria, supply chains, potential and limits.",
+    source: RAW_SOURCES[16],
+  },
+  {
+    title: 'WHO — Ambient air pollution and health',
+    description:
+      'Global data on the health impact of air pollution, particularly from coal combustion (PM2.5, NOx, SO₂).',
+    source: RAW_SOURCES[17],
   },
 ]
 

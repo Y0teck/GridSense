@@ -11,6 +11,7 @@ export const STRINGS = {
       goFurther: 'Aller plus loin',
       glossaire: 'Glossaire',
       carte: 'Carte',
+      energies: 'Énergies',
     },
     header: {
       subtitle: "Explorez l'impact de chaque source d'énergie sur le climat, le coût et la stabilité du réseau.",
@@ -81,6 +82,13 @@ export const STRINGS = {
       subtitle: 'Intensité carbone du mix électrique par pays (gCO₂eq/kWh)',
       note: '10 pays disponibles — cliquez pour voir le détail',
       noData: 'Données non disponibles',
+    },
+    energiesPage: {
+      title: "Les sources d'énergie",
+      intro: 'Impacts environnementaux, coûts, infrastructure et intégration réseau pour chaque filière.',
+      chartTitle: 'Comparaison des sources',
+      co2Label: 'CO₂ cycle de vie (gCO₂eq/kWh)',
+      lcoeLabel: 'Coût moyen LCOE (€/MWh)',
     },
     quiz: {
       title: 'Défis',
@@ -185,6 +193,7 @@ export const STRINGS = {
       goFurther: 'Go further',
       glossaire: 'Glossary',
       carte: 'Map',
+      energies: 'Energies',
     },
     header: {
       subtitle: 'Explore the impact of each energy source on climate, cost, and grid stability.',
@@ -255,6 +264,13 @@ export const STRINGS = {
       subtitle: 'Carbon intensity of the electricity mix by country (gCO₂eq/kWh)',
       note: '10 countries available — click to see details',
       noData: 'No data available',
+    },
+    energiesPage: {
+      title: 'Energy sources',
+      intro: 'Environmental impacts, costs, infrastructure and grid integration for every energy source.',
+      chartTitle: 'Source comparison',
+      co2Label: 'Lifecycle CO₂ (gCO₂eq/kWh)',
+      lcoeLabel: 'Average LCOE (€/MWh)',
     },
     quiz: {
       title: 'Challenges',
