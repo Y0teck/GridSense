@@ -256,6 +256,7 @@ export default function SimulateurPage() {
             presetLabel={activePresetLabel}
             theme={theme}
           />
+          <ParisAccordBanner co2={co2} theme={theme} />
           <ShareBar exportRef={exportRef} isLight={isLight} />
         </div>
 
@@ -268,6 +269,7 @@ export default function SimulateurPage() {
               renewables={renewables}
               lowCarbon={lowCarbon}
               theme={theme}
+              hideParisBanner
             />
           </div>
           <MixPieChart

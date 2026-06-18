@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import PresetSelector from '../components/PresetSelector'
-import ResultGauges from '../components/ResultGauges'
+import ResultGauges, { ParisAccordBanner } from '../components/ResultGauges'
 import ComparatorPanel from '../components/ComparatorPanel'
 import { COUNTRY_PRESETS } from '../data/countryPresets'
 import { ENERGY_SOURCES } from '../data/energyData'
@@ -57,6 +57,7 @@ export default function ComparaisonPage() {
           disabledId={presetIdB}
           theme={theme}
         />
+        <ParisAccordBanner co2={indicatorsA.co2} theme={theme} />
         <ResultGauges
           co2={indicatorsA.co2}
           cost={indicatorsA.cost}
@@ -64,6 +65,7 @@ export default function ComparaisonPage() {
           renewables={indicatorsA.renewables}
           lowCarbon={indicatorsA.lowCarbon}
           theme={theme}
+          hideParisBanner
         />
       </div>
 
@@ -78,14 +80,18 @@ export default function ComparaisonPage() {
           theme={theme}
         />
         {mixB ? (
-          <ResultGauges
-            co2={indicatorsB.co2}
-            cost={indicatorsB.cost}
-            stability={indicatorsB.stability}
-            renewables={indicatorsB.renewables}
-            lowCarbon={indicatorsB.lowCarbon}
-            theme={theme}
-          />
+          <>
+            <ParisAccordBanner co2={indicatorsB.co2} theme={theme} />
+            <ResultGauges
+              co2={indicatorsB.co2}
+              cost={indicatorsB.cost}
+              stability={indicatorsB.stability}
+              renewables={indicatorsB.renewables}
+              lowCarbon={indicatorsB.lowCarbon}
+              theme={theme}
+              hideParisBanner
+            />
+          </>
         ) : (
           <div className="flex h-48 items-center justify-center rounded-xl border border-dashed border-[#1F2937] text-sm text-[#9CA3AF]">
             {s.comparison.placeholder}
