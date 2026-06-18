@@ -5,9 +5,9 @@ import AllerPlusLoinPage from './pages/AllerPlusLoinPage'
 import QuizPage from './pages/QuizPage'
 
 export const ROUTES = [
-  { path: '/', label: 'Simulateur', element: <SimulateurPage /> },
-  { path: '/comparaison', label: 'Comparaison pays', element: <ComparaisonPage /> },
-  { path: '/quiz', label: 'Défis', element: <QuizPage /> },
-  { path: '/sources', label: 'Sources', element: <SourcesPage /> },
-  { path: '/aller-plus-loin', label: 'Aller plus loin', element: <AllerPlusLoinPage /> },
+  { path: '/', key: 'simulator', element: <SimulateurPage /> },
+  { path: '/comparaison', key: 'comparison', element: <ComparaisonPage /> },
+  { path: '/quiz', key: 'challenges', element: <QuizPage /> },
+  { path: '/sources', key: 'sources', element: <SourcesPage /> },
+  { path: '/aller-plus-loin', key: 'goFurther', element: <AllerPlusLoinPage /> },
 ]

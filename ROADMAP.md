@@ -10,7 +10,7 @@ Statuts : ✅ Fait · 🚧 En cours · 💡 À faire
 |--------|---------------|
 | ✅ | Architecture multi-pages avec React Router extensible |
 | ✅ | Navigation menu (Simulateur, Comparaison, Sources, Aller plus loin) |
-| 💡 | Internationalisation FR/EN (LanguageContext + fichier de strings centralisé, toggle dans le header) |
+| ✅ | Internationalisation FR/EN (LanguageContext + fichier de strings centralisé, toggle dans le header) |
 | ✅ | Thème dark / light |
 | ✅ | Logo SVG + favicon custom |
 | ✅ | Footer avec liens sociaux (GitHub, Mastodon, Bluesky) |

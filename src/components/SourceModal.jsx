@@ -1,5 +1,8 @@
+import { useStrings } from '../i18n/useStrings'
+
 export default function SourceModal({ source, theme, onClose }) {
   const isLight = theme === 'light'
+  const s = useStrings()
   const mutedText = isLight ? 'text-[#64748B]' : 'text-[#9CA3AF]'
   const borderColor = isLight ? 'border-[#E2E8F0]' : 'border-[#1F2937]'
   const bodyText = isLight ? 'text-[#334155]' : 'text-[#D1D5DB]'
@@ -55,7 +58,7 @@ export default function SourceModal({ source, theme, onClose }) {
 
           <section>
             <h3 className={`text-xs font-semibold uppercase tracking-wider ${mutedText}`}>
-              Chiffres clés
+              {s.sourceModal.keyFigures}
             </h3>
             <dl className={`mt-2 divide-y rounded-lg border ${borderColor}`}>
               {source.keyFigures.map((figure) => (
@@ -69,7 +72,7 @@ export default function SourceModal({ source, theme, onClose }) {
 
           <section>
             <h3 className={`text-xs font-semibold uppercase tracking-wider ${mutedText}`}>
-              Avantages
+              {s.sourceModal.advantages}
             </h3>
             <ul className="mt-2 space-y-2 text-sm">
               {source.advantages.map((advantage) => (
@@ -85,7 +88,7 @@ export default function SourceModal({ source, theme, onClose }) {
 
           <section>
             <h3 className={`text-xs font-semibold uppercase tracking-wider ${mutedText}`}>
-              Limites
+              {s.sourceModal.limits}
             </h3>
             <ul className="mt-2 space-y-2 text-sm">
               {source.limits.map((limit) => (

@@ -11,6 +11,7 @@ import {
   calcStability,
 } from '../utils/calculations'
 import { useTheme } from '../ThemeContext'
+import { useStrings } from '../i18n/useStrings'
 
 const FRANCE_PRESET = COUNTRY_PRESETS.find((preset) => preset.id === 'france')
 
@@ -28,6 +29,7 @@ function getIndicators(mix) {
 
 export default function ComparaisonPage() {
   const theme = useTheme()
+  const s = useStrings()
   const [presetIdA, setPresetIdA] = useState(FRANCE_PRESET.id)
   const [presetIdB, setPresetIdB] = useState(null)
 
@@ -37,8 +39,8 @@ export default function ComparaisonPage() {
   const mixA = presetA.mix
   const mixB = presetB ? presetB.mix : null
 
-  const labelA = presetA.label
-  const labelB = presetB ? presetB.label : '—'
+  const labelA = s.countries[presetA.id] ?? presetA.label
+  const labelB = presetB ? (s.countries[presetB.id] ?? presetB.label) : '—'
 
   const indicatorsA = getIndicators(mixA)
   const indicatorsB = mixB ? getIndicators(mixB) : null
@@ -86,7 +88,7 @@ export default function ComparaisonPage() {
           />
         ) : (
           <div className="flex h-48 items-center justify-center rounded-xl border border-dashed border-[#1F2937] text-sm text-[#9CA3AF]">
-            Sélectionnez un pays à comparer
+            {s.comparison.placeholder}
           </div>
         )}
       </div>

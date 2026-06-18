@@ -17,6 +17,7 @@ import {
   calcStability,
 } from '../utils/calculations'
 import { useTheme } from '../ThemeContext'
+import { useStrings } from '../i18n/useStrings'
 
 const MIX_KEYS = [
   'nucleaire',
@@ -80,6 +81,7 @@ function searchParamsMatchMix(searchParams, mix, activePresetId) {
 function ShareBar({ exportRef, isLight }) {
   const [captureState, setCaptureState] = useState('idle')
   const [shareCopied, setShareCopied] = useState(false)
+  const s = useStrings()
 
   const defaultButtonClass = isLight
     ? 'border-[#CBD5E1] text-[#64748B] hover:border-[#22D3EE] hover:text-[#22D3EE]'
@@ -171,10 +173,10 @@ function ShareBar({ exportRef, isLight }) {
           <path d="M5 21h14" />
         </svg>
         {captureState === 'loading'
-          ? 'Capture…'
+          ? s.shareBar.capturing
           : captureState === 'success'
-            ? '✓ Téléchargé'
-            : 'Exporter PNG'}
+            ? s.shareBar.downloaded
+            : s.shareBar.export}
       </button>
 
       <button
@@ -201,7 +203,7 @@ function ShareBar({ exportRef, isLight }) {
           <path d="m8.59 13.51 6.83 3.98" />
           <path d="m15.41 6.51-6.82 3.98" />
         </svg>
-        {shareCopied ? '✓ Lien copié !' : 'Partager'}
+        {shareCopied ? s.shareBar.copied : s.shareBar.share}
       </button>
     </div>
   )
@@ -214,6 +216,7 @@ export default function SimulateurPage() {
   const exportRef = useRef(null)
   const theme = useTheme()
   const isLight = theme === 'light'
+  const s = useStrings()
 
   const co2 = calcCO2(mix, ENERGY_SOURCES)
   const cost = calcCost(mix, ENERGY_SOURCES)
@@ -221,7 +224,7 @@ export default function SimulateurPage() {
   const renewables = calcRenewables(mix)
   const lowCarbon = mix.nucleaire + renewables
   const activePreset = COUNTRY_PRESETS.find((preset) => preset.id === activePresetId)
-  const activePresetLabel = activePreset ? activePreset.label : null
+  const activePresetLabel = activePreset ? (s.countries[activePreset.id] ?? activePreset.label) : null
   const exportMixLabel = activePresetLabel ? `Mix énergétique de ${activePresetLabel}` : 'Mix personnalisé'
 
   useEffect(() => {
@@ -304,7 +307,7 @@ export default function SimulateurPage() {
           {Object.values(ENERGY_SOURCES).map((source) => (
             <div key={source.id} style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
               <div style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: source.color, flexShrink: 0 }} />
-              <span style={{ fontSize: '12px', color: '#9CA3AF' }}>{source.label}</span>
+              <span style={{ fontSize: '12px', color: '#9CA3AF' }}>{s.sources[source.id] ?? source.label}</span>
             </div>
           ))}
         </div>

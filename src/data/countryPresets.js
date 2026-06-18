@@ -130,7 +130,7 @@ export const COUNTRY_PRESETS = [
     },
   },
   {
-    id: 'united-states',
+    id: 'usa',
     label: 'États-Unis',
     flag: '🇺🇸',
     year: 2023,

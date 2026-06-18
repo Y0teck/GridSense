@@ -1,5 +1,8 @@
+import { useStrings } from '../i18n/useStrings'
+
 export default function IndicatorModal({ indicator, theme, onClose }) {
   const isLight = theme === 'light'
+  const s = useStrings()
   const mutedText = isLight ? 'text-[#64748B]' : 'text-[#9CA3AF]'
   const borderColor = isLight ? 'border-[#E2E8F0]' : 'border-[#1F2937]'
 
@@ -41,7 +44,7 @@ export default function IndicatorModal({ indicator, theme, onClose }) {
         <div className="mt-5 space-y-6">
           <section>
             <h3 className={`text-xs font-semibold uppercase tracking-wider ${mutedText}`}>
-              Définition
+              {s.modal.definition}
             </h3>
             <p className={`mt-2 text-sm leading-relaxed ${isLight ? 'text-[#334155]' : 'text-[#D1D5DB]'}`}>
               {indicator.definition}
@@ -50,7 +53,7 @@ export default function IndicatorModal({ indicator, theme, onClose }) {
 
           <section>
             <h3 className={`text-xs font-semibold uppercase tracking-wider ${mutedText}`}>
-              Calcul
+              {s.modal.calculation}
             </h3>
             <pre
               className={`mt-2 overflow-x-auto rounded-lg border p-4 text-xs leading-relaxed ${
@@ -65,7 +68,7 @@ export default function IndicatorModal({ indicator, theme, onClose }) {
 
           <section>
             <h3 className={`text-xs font-semibold uppercase tracking-wider ${mutedText}`}>
-              Valeurs de référence
+              {s.modal.references}
             </h3>
             <dl className={`mt-2 divide-y rounded-lg border ${borderColor}`}>
               {indicator.references.map((reference) => (
@@ -85,7 +88,7 @@ export default function IndicatorModal({ indicator, theme, onClose }) {
           {indicator.example ? (
             <section>
               <h3 className={`text-xs font-semibold uppercase tracking-wider ${mutedText}`}>
-                Exemple concret
+                {s.modal.example}
               </h3>
               <p className={`mt-2 text-sm leading-relaxed ${isLight ? 'text-[#334155]' : 'text-[#D1D5DB]'}`}>
                 {indicator.example}
@@ -96,7 +99,7 @@ export default function IndicatorModal({ indicator, theme, onClose }) {
           {indicator.caveat ? (
             <section>
               <h3 className={`text-xs font-semibold uppercase tracking-wider ${mutedText}`}>
-                À noter
+                {s.modal.caveat}
               </h3>
               <p className={`mt-2 text-sm leading-relaxed ${isLight ? 'text-[#334155]' : 'text-[#D1D5DB]'}`}>
                 <span aria-hidden="true">▲ </span>
@@ -107,7 +110,7 @@ export default function IndicatorModal({ indicator, theme, onClose }) {
 
           <section>
             <h3 className={`text-xs font-semibold uppercase tracking-wider ${mutedText}`}>
-              Sources
+              {s.modal.sources}
             </h3>
             <ul className="mt-2 space-y-2 text-sm">
               {indicator.sources.map((source) => (

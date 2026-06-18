@@ -1,0 +1,236 @@
+// ÉnergIA — Centralized UI strings (FR / EN)
+// Usage: import { useStrings } from '../i18n/useStrings'
+
+export const STRINGS = {
+  fr: {
+    nav: {
+      simulator: 'Simulateur',
+      comparison: 'Comparaison pays',
+      challenges: 'Défis',
+      sources: 'Sources',
+      goFurther: 'Aller plus loin',
+    },
+    header: {
+      subtitle: "Explorez l'impact de chaque source d'énergie sur le climat, le coût et la stabilité du réseau.",
+    },
+    sliders: {
+      title: 'Mix énergétique',
+      titleWithCountry: (country) => `Mix énergétique de ${country}`,
+      subtitle: "Les autres filières s'ajustent automatiquement.",
+      subtitlePreset: 'Mix préconfiguré modifiable.',
+    },
+    gauges: {
+      co2: { label: 'Émissions CO₂', sublabel: 'Moyenne pondérée cycle de vie (IPCC AR6)' },
+      cost: { label: 'Coût de production', sublabel: 'LCOE moyen pondéré (IRENA 2023, indicatif)' },
+      stability: { label: 'Stabilité réseau', sublabel: 'Part des sources pilotables (dispatchables)' },
+      renewables: { label: 'Énergies renouvelables', sublabel: 'Éolien + Solaire + Hydraulique + Bioénergies' },
+      lowCarbon: { label: 'Énergie bas-carbone', sublabel: 'Nucléaire + Renouvelables' },
+    },
+    paris: {
+      success: {
+        title: 'Objectif Accord de Paris atteint',
+        subtitle: 'Votre mix est compatible avec une trajectoire 1,5°C — en dessous de 50 gCO₂eq/kWh.',
+      },
+      warning: {
+        title: (delta) => `${delta} gCO₂eq/kWh au-dessus de l'objectif Accord de Paris`,
+        subtitle: "L'objectif pour le secteur électrique est < 50 gCO₂eq/kWh (IPCC AR6, trajectoire 1,5°C).",
+      },
+    },
+    pieChart: {
+      title: 'Composition du mix',
+    },
+    shareBar: {
+      export: 'Exporter PNG',
+      share: 'Partager',
+      copied: '✓ Lien copié !',
+      downloaded: '✓ Téléchargé',
+      capturing: 'Capture…',
+    },
+    comparison: {
+      placeholder: 'Sélectionnez un pays à comparer',
+    },
+    comparator: {
+      title: 'Comparaison détaillée',
+      better: 'Meilleur',
+    },
+    sourcesPage: {
+      title: 'Sources & méthodologie',
+      footer: 'Les valeurs affichées dans le simulateur sont des approximations à visée pédagogique. Pour des analyses précises, référez-vous directement aux sources ci-dessus.',
+    },
+    goFurtherPage: {
+      title: 'Aller plus loin',
+      intro: 'Ressources sélectionnées pour approfondir les enjeux du mix électrique, de la transition énergétique et du climat.',
+      section1: 'Comprendre',
+      section2: 'Explorer les données',
+      section3: 'Approfondir',
+    },
+    quiz: {
+      title: 'Défis',
+      subtitle: 'Relevez nos défis pour comprendre les enjeux du mix électrique.',
+      startBtn: 'Relever le défi',
+      backBtn: '← Retour aux défis',
+      objectivesTitle: 'Objectifs en direct',
+      validateBtn: 'Valider mon mix',
+      successTitle: 'Défi relevé !',
+      successExamplesTitle: 'Pays qui relèvent ce défi',
+      shareBtn: 'Partager ce mix',
+      nextChallengeBtn: 'Choisir un autre défi',
+      difficulty: {
+        easy: 'Facile',
+        medium: 'Moyen',
+        hard: 'Difficile',
+      },
+    },
+    modal: {
+      definition: 'Définition',
+      calculation: 'Calcul',
+      references: 'Valeurs de référence',
+      example: 'Exemple concret',
+      caveat: 'À noter',
+      sources: 'Sources',
+      close: 'Fermer',
+    },
+    sourceModal: {
+      keyFigures: 'Chiffres clés',
+      advantages: 'Avantages',
+      limits: 'Limites',
+    },
+    sources: {
+      nucleaire: 'Nucléaire',
+      eolien: 'Éolien',
+      solaire: 'Solaire',
+      hydraulique: 'Hydraulique',
+      gaz: 'Gaz naturel',
+      charbon: 'Thermique fossile',
+      bioenergies: 'Bioénergies',
+    },
+    countries: {
+      france: 'France',
+      germany: 'Allemagne',
+      poland: 'Pologne',
+      spain: 'Espagne',
+      sweden: 'Suède',
+      norway: 'Norvège',
+      usa: 'États-Unis',
+      china: 'Chine',
+      india: 'Inde',
+      brazil: 'Brésil',
+    },
+  },
+
+  en: {
+    nav: {
+      simulator: 'Simulator',
+      comparison: 'Country comparison',
+      challenges: 'Challenges',
+      sources: 'Sources',
+      goFurther: 'Go further',
+    },
+    header: {
+      subtitle: 'Explore the impact of each energy source on climate, cost, and grid stability.',
+    },
+    sliders: {
+      title: 'Energy mix',
+      titleWithCountry: (country) => `Energy mix of ${country}`,
+      subtitle: 'Other sources adjust automatically.',
+      subtitlePreset: 'Preset mix — adjust freely.',
+    },
+    gauges: {
+      co2: { label: 'CO₂ emissions', sublabel: 'Weighted lifecycle average (IPCC AR6)' },
+      cost: { label: 'Production cost', sublabel: 'Weighted average LCOE (IRENA 2023, indicative)' },
+      stability: { label: 'Grid stability', sublabel: 'Share of dispatchable sources' },
+      renewables: { label: 'Renewable energy', sublabel: 'Wind + Solar + Hydro + Bioenergy' },
+      lowCarbon: { label: 'Low-carbon energy', sublabel: 'Nuclear + Renewables' },
+    },
+    paris: {
+      success: {
+        title: 'Paris Agreement target reached',
+        subtitle: 'Your mix is compatible with a 1.5°C pathway — below 50 gCO₂eq/kWh.',
+      },
+      warning: {
+        title: (delta) => `${delta} gCO₂eq/kWh above the Paris Agreement target`,
+        subtitle: 'The electricity sector target is < 50 gCO₂eq/kWh (IPCC AR6, 1.5°C pathway).',
+      },
+    },
+    pieChart: {
+      title: 'Mix composition',
+    },
+    shareBar: {
+      export: 'Export PNG',
+      share: 'Share',
+      copied: '✓ Link copied!',
+      downloaded: '✓ Downloaded',
+      capturing: 'Capturing…',
+    },
+    comparison: {
+      placeholder: 'Select a country to compare',
+    },
+    comparator: {
+      title: 'Detailed comparison',
+      better: 'Better',
+    },
+    sourcesPage: {
+      title: 'Sources & methodology',
+      footer: 'Values shown in the simulator are approximations for educational purposes. For precise analyses, refer directly to the sources above.',
+    },
+    goFurtherPage: {
+      title: 'Go further',
+      intro: 'Curated resources to deepen your understanding of the electricity mix, the energy transition, and climate.',
+      section1: 'Understand',
+      section2: 'Explore data',
+      section3: 'Dive deeper',
+    },
+    quiz: {
+      title: 'Challenges',
+      subtitle: 'Take on our challenges to understand the stakes of the electricity mix.',
+      startBtn: 'Take the challenge',
+      backBtn: '← Back to challenges',
+      objectivesTitle: 'Live objectives',
+      validateBtn: 'Validate my mix',
+      successTitle: 'Challenge complete!',
+      successExamplesTitle: 'Countries that meet this challenge',
+      shareBtn: 'Share this mix',
+      nextChallengeBtn: 'Choose another challenge',
+      difficulty: {
+        easy: 'Easy',
+        medium: 'Medium',
+        hard: 'Hard',
+      },
+    },
+    modal: {
+      definition: 'Definition',
+      calculation: 'Calculation',
+      references: 'Reference values',
+      example: 'Concrete example',
+      caveat: 'Note',
+      sources: 'Sources',
+      close: 'Close',
+    },
+    sourceModal: {
+      keyFigures: 'Key figures',
+      advantages: 'Advantages',
+      limits: 'Limitations',
+    },
+    sources: {
+      nucleaire: 'Nuclear',
+      eolien: 'Wind',
+      solaire: 'Solar',
+      hydraulique: 'Hydropower',
+      gaz: 'Natural gas',
+      charbon: 'Fossil thermal',
+      bioenergies: 'Bioenergy',
+    },
+    countries: {
+      france: 'France',
+      germany: 'Germany',
+      poland: 'Poland',
+      spain: 'Spain',
+      sweden: 'Sweden',
+      norway: 'Norway',
+      usa: 'United States',
+      china: 'China',
+      india: 'India',
+      brazil: 'Brazil',
+    },
+  },
+}

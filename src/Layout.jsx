@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom'
 import Header from './components/Header'
 import NavMenu from './components/NavMenu'
 import { ThemeContext } from './ThemeContext'
+import { LanguageProvider } from './LanguageContext'
 
 export default function Layout() {
   const [theme, setTheme] = useState(() => {
@@ -21,17 +22,19 @@ export default function Layout() {
 
   return (
     <ThemeContext.Provider value={theme}>
-      <div
-        className={`min-h-screen transition-colors ${
-          isLight ? 'bg-[#F8FAFC] text-[#111827]' : 'bg-[#0A0F1E] text-[#F9FAFB]'
-        }`}
-      >
-        <Header theme={theme} onToggleTheme={toggleTheme} />
-        <NavMenu />
-        <main>
-          <Outlet />
-        </main>
-      </div>
+      <LanguageProvider>
+        <div
+          className={`min-h-screen transition-colors ${
+            isLight ? 'bg-[#F8FAFC] text-[#111827]' : 'bg-[#0A0F1E] text-[#F9FAFB]'
+          }`}
+        >
+          <Header theme={theme} onToggleTheme={toggleTheme} />
+          <NavMenu />
+          <main>
+            <Outlet />
+          </main>
+        </div>
+      </LanguageProvider>
     </ThemeContext.Provider>
   )
 }

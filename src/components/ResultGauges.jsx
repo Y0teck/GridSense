@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import IndicatorModal from './IndicatorModal'
+import { useStrings } from '../i18n/useStrings'
 
 // Source donnees : resultats calcules depuis src/utils/calculations.js.
 
@@ -258,6 +259,7 @@ function GaugeCard({ label, value, unit, colorClass, sublabel, indicator, theme,
 export function ParisAccordBanner({ co2, theme, exportMode = false }) {
   const [modalOpen, setModalOpen] = useState(false)
   const isLight = theme === 'light'
+  const s = useStrings()
   const isSuccess = co2 <= 50
   const delta = co2 - 50
   const borderColor = isSuccess ? 'border-[#10B981]' : co2 <= 200 ? 'border-[#F59E0B]' : 'border-[#EF4444]'
@@ -323,13 +325,13 @@ export function ParisAccordBanner({ co2, theme, exportMode = false }) {
           <div>
             <p className="font-semibold">
               {isSuccess
-                ? 'Objectif Accord de Paris atteint'
-                : `${delta} gCO₂eq/kWh au-dessus de l'objectif Accord de Paris`}
+                ? s.paris.success.title
+                : s.paris.warning.title(delta)}
             </p>
             <p className={`mt-1 text-sm leading-relaxed ${mutedText}`}>
               {isSuccess
-                ? 'Votre mix est compatible avec une trajectoire 1,5°C — en dessous de 50 gCO₂eq/kWh.'
-                : "L'objectif pour le secteur électrique est < 50 gCO₂eq/kWh (IPCC AR6, trajectoire 1,5°C)."}
+                ? s.paris.success.subtitle
+                : s.paris.warning.subtitle}
             </p>
           </div>
         </div>
@@ -369,60 +371,61 @@ export function ParisAccordBanner({ co2, theme, exportMode = false }) {
 
 export default function ResultGauges({ co2, cost, stability, renewables, lowCarbon, theme, exportMode = false, hideParisBanner = false }) {
   const [openIndicator, setOpenIndicator] = useState(null)
+  const s = useStrings()
 
   return (
     <>
       <section className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <GaugeCard
-          label="Émissions CO₂"
+          label={s.gauges.co2.label}
           value={co2}
           unit="gCO₂eq/kWh"
           colorClass={getCO2Color(co2)}
-          sublabel="Moyenne pondérée cycle de vie (IPCC AR6)"
+          sublabel={s.gauges.co2.sublabel}
           indicator={INDICATOR_CONTENT.co2}
           theme={theme}
           onInfoClick={setOpenIndicator}
           exportMode={exportMode}
         />
         <GaugeCard
-          label="Coût de production"
+          label={s.gauges.cost.label}
           value={cost}
           unit="€/MWh"
           colorClass={getCostColor(cost)}
-          sublabel="LCOE moyen pondéré (IRENA 2023, indicatif)"
+          sublabel={s.gauges.cost.sublabel}
           indicator={INDICATOR_CONTENT.cost}
           theme={theme}
           onInfoClick={setOpenIndicator}
           exportMode={exportMode}
         />
         <GaugeCard
-          label="Stabilité réseau"
+          label={s.gauges.stability.label}
           value={stability}
           unit="/100"
           colorClass={getStabilityColor(stability)}
-          sublabel="Part des sources pilotables (dispatchables)"
+          sublabel={s.gauges.stability.sublabel}
           indicator={INDICATOR_CONTENT.stability}
           theme={theme}
           onInfoClick={setOpenIndicator}
           exportMode={exportMode}
         />
         <GaugeCard
-          label="Énergies renouvelables"
+          label={s.gauges.renewables.label}
           value={renewables}
           unit="%"
           colorClass={getRenewablesColor(renewables)}
-          sublabel="Éolien + Solaire + Hydraulique + Bioénergies"
+          sublabel={s.gauges.renewables.sublabel}
           indicator={INDICATOR_CONTENT.renewables}
           theme={theme}
           onInfoClick={setOpenIndicator}
           exportMode={exportMode}
         />
         <GaugeCard
-          label="Énergie bas-carbone"
+          label={s.gauges.lowCarbon.label}
           value={lowCarbon}
           unit="%"
           colorClass={getLowCarbonColor(lowCarbon)}
-          sublabel="Nucléaire + Renouvelables"
+          sublabel={s.gauges.lowCarbon.sublabel}
           indicator={INDICATOR_CONTENT.lowCarbon}
           theme={theme}
           onInfoClick={setOpenIndicator}

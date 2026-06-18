@@ -1,10 +1,12 @@
 import { NavLink } from 'react-router-dom'
 import { ROUTES } from '../routes'
 import { useTheme } from '../ThemeContext'
+import { useStrings } from '../i18n/useStrings'
 
 export default function NavMenu() {
   const theme = useTheme()
   const isLight = theme === 'light'
+  const s = useStrings()
 
   return (
     <nav className={`${isLight ? 'bg-white' : 'bg-[#111827]'}`}>
@@ -24,7 +26,7 @@ export default function NavMenu() {
               }`
             }
           >
-            {route.label}
+            {s.nav[route.key]}
           </NavLink>
         ))}
       </div>

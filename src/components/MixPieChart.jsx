@@ -1,6 +1,7 @@
 // Source donnees : mix utilisateur et coefficients depuis src/data/energyData.js.
 
 import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts'
+import { useStrings } from '../i18n/useStrings'
 
 function renderLabel({ name, value }) {
   return value > 3 ? `${name} ${value}%` : ''
@@ -28,12 +29,13 @@ function MixTooltip({ active, payload }) {
 
 export default function MixPieChart({ mix, sources, refData, theme, exportMode = false, showLegend = true }) {
   const isLight = theme === 'light'
+  const s = useStrings()
   const shouldShowLegend = exportMode ? false : showLegend
   const referenceTotal = Number.isFinite(refData?.total) ? refData.total : null
   const data = Object.values(sources).map((source) => ({
     id: source.id,
-    name: `${source.icon} ${source.label}`,
-    legendName: source.label,
+    name: `${source.icon} ${s.sources[source.id] ?? source.label}`,
+    legendName: s.sources[source.id] ?? source.label,
     value: mix[source.id],
     twh: referenceTotal === null ? null : (mix[source.id] / 100) * referenceTotal,
     color: source.color,
@@ -52,7 +54,7 @@ export default function MixPieChart({ mix, sources, refData, theme, exportMode =
           isLight ? 'text-[#64748B]' : 'text-[#9CA3AF]'
         }`}
       >
-        Composition du mix
+        {s.pieChart.title}
       </h2>
 
       {exportMode ? (

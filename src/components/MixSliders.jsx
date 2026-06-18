@@ -3,12 +3,14 @@
 import { useState } from 'react'
 import { ENERGY_SOURCES } from '../data/energyData'
 import { SOURCE_CONTENT } from '../data/sourceContent'
+import { useStrings } from '../i18n/useStrings'
 import SourceModal from './SourceModal'
 
 export default function MixSliders({ mix, onChange, theme, presetLabel = null }) {
   const [openSource, setOpenSource] = useState(null)
   const sources = Object.values(ENERGY_SOURCES)
   const isLight = theme === 'light'
+  const s = useStrings()
 
   function updateSource(id, value) {
     const newValue = Math.min(100, Math.max(0, Number(value)))
@@ -48,6 +50,13 @@ export default function MixSliders({ mix, onChange, theme, presetLabel = null })
     })
   }
 
+  function openSourceDetails(source) {
+    setOpenSource({
+      ...SOURCE_CONTENT[source.id],
+      label: s.sources[source.id] ?? SOURCE_CONTENT[source.id].label,
+    })
+  }
+
   return (
     <section
       className={`rounded-xl border p-6 transition-colors ${
@@ -63,69 +72,73 @@ export default function MixSliders({ mix, onChange, theme, presetLabel = null })
               isLight ? 'text-[#111827]' : 'text-[#F9FAFB]'
             }`}
           >
-            {presetLabel ? `Mix énergétique de ${presetLabel}` : 'Mix énergétique'}
+            {presetLabel ? s.sliders.titleWithCountry(presetLabel) : s.sliders.title}
           </h2>
           <p className={`mt-1 text-sm ${isLight ? 'text-[#475569]' : 'text-[#9CA3AF]'}`}>
-            {presetLabel ? 'Mix préconfiguré modifiable.' : "Les autres filières s'ajustent automatiquement."}
+            {presetLabel ? s.sliders.subtitlePreset : s.sliders.subtitle}
           </p>
         </div>
       </div>
 
       <div className="space-y-5">
-        {sources.map((source) => (
-          <label key={source.id} className="group block">
-            <div className="mb-2 flex items-center justify-between gap-4">
-              <span
-                className={`flex min-w-0 items-center gap-2 text-sm ${
-                  isLight ? 'text-[#111827]' : 'text-[#F9FAFB]'
-                }`}
-              >
-                <span aria-hidden="true">{source.icon}</span>
-                <span className="truncate">{source.label}</span>
-              </span>
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={(event) => {
-                    event.preventDefault()
-                    setOpenSource(SOURCE_CONTENT[source.id])
-                  }}
-                  aria-label={`Afficher les détails : ${source.label}`}
-                  className={`flex h-6 w-6 items-center justify-center rounded-full border text-xs font-bold opacity-0 transition-all group-hover:opacity-100 ${
-                    isLight
-                      ? 'border-[#CBD5E1] text-[#64748B] hover:border-[#22D3EE] hover:text-[#22D3EE]'
-                      : 'border-[#374151] text-[#6B7280] hover:border-[#22D3EE] hover:text-[#22D3EE]'
-                  }`}
-                >
-                  i
-                </button>
+        {sources.map((source) => {
+          const label = s.sources[source.id] ?? source.label
+
+          return (
+            <label key={source.id} className="group block">
+              <div className="mb-2 flex items-center justify-between gap-4">
                 <span
-                  className={`font-mono text-sm font-bold ${
+                  className={`flex min-w-0 items-center gap-2 text-sm ${
                     isLight ? 'text-[#111827]' : 'text-[#F9FAFB]'
                   }`}
                 >
-                  {mix[source.id]}%
+                  <span aria-hidden="true">{source.icon}</span>
+                  <span className="truncate">{label}</span>
                 </span>
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={(event) => {
+                      event.preventDefault()
+                      openSourceDetails(source)
+                    }}
+                    aria-label={`Afficher les détails : ${label}`}
+                    className={`flex h-6 w-6 items-center justify-center rounded-full border text-xs font-bold opacity-0 transition-all group-hover:opacity-100 ${
+                      isLight
+                        ? 'border-[#CBD5E1] text-[#64748B] hover:border-[#22D3EE] hover:text-[#22D3EE]'
+                        : 'border-[#374151] text-[#6B7280] hover:border-[#22D3EE] hover:text-[#22D3EE]'
+                    }`}
+                  >
+                    i
+                  </button>
+                  <span
+                    className={`font-mono text-sm font-bold ${
+                      isLight ? 'text-[#111827]' : 'text-[#F9FAFB]'
+                    }`}
+                  >
+                    {mix[source.id]}%
+                  </span>
+                </div>
               </div>
-            </div>
 
-            <input
-              type="range"
-              min="0"
-              max="100"
-              step="1"
-              value={mix[source.id]}
-              aria-label={`Part ${source.label}`}
-              onChange={(event) => updateSource(source.id, event.target.value)}
-              className="energy-slider w-full cursor-pointer"
-              style={{
-                '--slider-color': source.color,
-                '--slider-track': isLight ? '#E2E8F0' : '#1F2937',
-                '--slider-progress': `${mix[source.id]}%`,
-              }}
-            />
-          </label>
-        ))}
+              <input
+                type="range"
+                min="0"
+                max="100"
+                step="1"
+                value={mix[source.id]}
+                aria-label={`Part ${label}`}
+                onChange={(event) => updateSource(source.id, event.target.value)}
+                className="energy-slider w-full cursor-pointer"
+                style={{
+                  '--slider-color': source.color,
+                  '--slider-track': isLight ? '#E2E8F0' : '#1F2937',
+                  '--slider-progress': `${mix[source.id]}%`,
+                }}
+              />
+            </label>
+          )
+        })}
       </div>
 
       {openSource ? (

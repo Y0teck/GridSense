@@ -1,7 +1,13 @@
 // Source donnees : badge public ODRE / RTE.
 
+import { useContext } from 'react'
+import { LanguageContext } from '../LanguageContext'
+import { useStrings } from '../i18n/useStrings'
+
 export default function Header({ theme, onToggleTheme }) {
   const isLight = theme === 'light'
+  const { lang, setLang } = useContext(LanguageContext)
+  const s = useStrings()
 
   return (
     <header className={`relative ${isLight ? 'bg-white' : 'bg-[#0A0F1E]'}`}>
@@ -16,11 +22,23 @@ export default function Header({ theme, onToggleTheme }) {
             </svg>
           </h1>
           <p className={`mt-1 text-sm ${isLight ? 'text-[#475569]' : 'text-[#9CA3AF]'}`}>
-            Explorez l'impact de chaque source d'énergie sur le climat, le coût et la stabilité du réseau.
+            {s.header.subtitle}
           </p>
         </div>
 
         <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={() => setLang(lang === 'fr' ? 'en' : 'fr')}
+            aria-label={lang === 'fr' ? 'Switch to English' : 'Passer en français'}
+            className={`grid h-9 w-9 place-items-center rounded border text-xs font-bold transition ${
+              isLight
+                ? 'border-[#CBD5E1] bg-[#F8FAFC] text-[#111827] hover:border-[#22D3EE]'
+                : 'border-[#22D3EE]/40 bg-[#111827] text-[#F9FAFB] hover:border-[#22D3EE]'
+            }`}
+          >
+            {lang === 'fr' ? 'EN' : 'FR'}
+          </button>
           <button
             type="button"
             onClick={onToggleTheme}

@@ -1,7 +1,9 @@
 import { COUNTRY_PRESETS } from '../data/countryPresets'
+import { useStrings } from '../i18n/useStrings'
 
 export default function PresetSelector({ onSelect, theme, activeId = null, disabledId = null }) {
   const isLight = theme === 'light'
+  const s = useStrings()
 
   function selectPreset(preset) {
     onSelect(preset.mix)
@@ -45,7 +47,9 @@ export default function PresetSelector({ onSelect, theme, activeId = null, disab
               <span aria-hidden="true" style={{ fontSize: '1.5rem' }}>
                 {preset.flag}
               </span>
-              <span className="max-w-full truncate text-xs font-semibold">{preset.label}</span>
+              <span className="max-w-full truncate text-xs font-semibold">
+                {s.countries[preset.id] ?? preset.label}
+              </span>
             </button>
           )
         })}
